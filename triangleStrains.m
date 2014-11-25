@@ -71,6 +71,8 @@ function deformation = triangleStrains(triangleXs,triangleYs)
 %  X^{-1} = 1/(2*Area) *  |beta1   beta2   beta3 |
 %                         [gamma1  gamma2  gamma3]
 
+%%% Note: must subtract the initial (undeformed) centroid from original and
+%%% new coordinates so that initial triangle has a centroid of zero
 
 N = length(triangleXs);
 [T,~] = size(triangleXs{1});
@@ -97,12 +99,25 @@ for n = 1:N
     for t = 1:T-1
         ccwInd = K(1:3);
         
+        
         x = triangleXs{n}(t,ccwInd);
         y = triangleYs{n}(t,ccwInd);
         
-        
         xnew = triangleXs{n}(t+1,ccwInd);
         ynew = triangleYs{n}(t+1,ccwInd);
+        
+        
+        % original triangle needs to have centroid located at zero, so
+        % shift both triangles by initial centroid
+        
+        xCentroid = mean(x);
+        yCentroid = mean(y);
+        
+        x = x-xCentroid;
+        y = y-yCentroid;
+        
+        xnew = xnew - xCentroid;
+        ynew = ynew - yCentroid;
         
         %displacements in x and y
         u = xnew-x;
