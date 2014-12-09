@@ -1,4 +1,6 @@
 function [X,Y,R] = returnCentersXcorr(image,coneRadius,cannyThreshold,radiusThreshold,imageThreshold,plotOn,dividingLine,iteration,totalIterations,adapt,points)
+% Written by Jennifer Rieser, University of Pennsylvania 2014
+
 
 %%% Output:
 % X = particle X positions

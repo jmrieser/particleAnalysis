@@ -1,4 +1,6 @@
 function coneOut = generateRightCircularCone(x,y,x0,y0,r,h)
+% Written by Jennifer Rieser, University of Pennsylvania 2014
+
 
 % x and y should be outputs from mesgrid
 % (x0,y0) is the location of the center of the cone
