@@ -44,29 +44,23 @@ function deformation = triangleStrains(triangleXs,triangleYs)
 % there are six equations and six unknowns, which yields the following
 % matrix equations:
 
-% shift vertices so that original triangle centroid = 0. (If the triangle
-% is not shifted, a,b,c,d are unchanged, but constant1 and constant2 are
-% changed and no longer equal to centroid shift)
+% [u1]   [ 1 x1 y1 ] [constant1]
+% |u2| = | 1 x2 y2 | |    a    |
+% [u3]   [ 1 x3 y3 ] [    b    ]
 
-% Let xis = xi - xcm; yis = yi-ycm; xcm = mean(xi) and ycm = mean(yi) for
-% triangles.
-
-% [u1]   [ 1 x1s y1s ] [constant1]
-% |u2| = | 1 x2s y2s | |    a    |
-% [u3]   [ 1 x3s y3s ] [    b    ]
-
-% [v1]   [ 1 x1s y1s ] [constant2]
-% |v2| = | 1 x2s y2s | |    c    |
-% [v3]   [ 1 x3s y3s ] [    d    ]
+% [v1]   [ 1 x1 y1 ] [constant2]
+% |v2|   | 1 x2 y2 | |    c    |
+% [v3]   [ 1 x3 y3 ] [    d    ]
 
 % to solve for a,b,c,d,constant1,constant2, need to invert the following
 % matrix:
 
-%         [ 1 x1s y1s ]
-%  X =    | 1 x2s y2s |
-%         [ 1 x3s y3s ]
+%         [ 1 x1 y1 ]
+%  X =    | 1 x2 y2 |
+%         [ 1 x3 y3 ]
 
 % From Mathematica, 
+
 %                                                                                [    2*Area/3       2*Area/3       2*Area/3     ]
 %  X^{-1} = (-x2s y1s + x3s y1s + x1s y2s - x3s y2s - x1s y3s + x2s y3s)^(-1) *  |   (y2s - y3s)    (y3s - y1s)    (y1s - y2s)   |
 %                                                                                [   (x3s - x2s)    (x1s - x3s)    (x2s - x1s)   ]
